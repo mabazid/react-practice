@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import ElementsList from './components/ElementsList';
+import Form from './components/Form';
+
+const initialElements = [
+  {
+    name: 'Max',
+    age: 31,
+  },
+  {
+    name: 'Jane',
+    age: 22,
+  },
+];
+
 
 function App() {
+  const [element, setElement] = useState(initialElements);
+
+  const NewInitialElements = (newE) => {
+    setElement((prevElement) => {
+      return [newE, ...prevElement];
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div><Form passInitial={ NewInitialElements } className="goal-form"/></div>
+      <div><ElementsList list={ element }/></div>
     </div>
   );
 }
