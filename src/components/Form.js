@@ -22,6 +22,8 @@ const Form = (props) => {
     };
 
     props.passInitial(element);
+    setNewName('');
+    setNewAge('');
   };
 
   const reset = () => {
