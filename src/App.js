@@ -4,7 +4,7 @@ import './App.css';
 import ElementsList from './components/ElementsList';
 import Form from './components/Form';
 
-const initialElements = []    ;
+const initialElements = [];
 
 
 function App() {
@@ -29,7 +29,11 @@ function App() {
 
   return (
     <div className="app">
-      <div><Form passInitial={ NewInitialElements } className="goal-form"/></div>
+      <div><Form
+        passInitial={ NewInitialElements }
+        onAddUser={ useEffect }
+        className="goal-form"
+      /></div>
       <div><ElementsList list={ element }/></div>
     </div>
   );
