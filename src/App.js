@@ -25,7 +25,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <div><Form passInitial={ NewInitialElements } className="goal-form"/></div>
       <div><ElementsList list={ element }/></div>
     </div>
