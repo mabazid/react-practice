@@ -1,22 +1,25 @@
-import { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import ElementsList from './components/ElementsList';
 import Form from './components/Form';
 
-const initialElements = [
-  {
-    name: 'Max',
-    age: 31,
-  },
-  {
-    name: 'Jane',
-    age: 22,
-  },
-];
+const initialElements = []    ;
 
 
 function App() {
   const [element, setElement] = useState(initialElements);
+
+  const getGiHubUserWithAxios = async () => {
+    const response = await axios.get('http://localhost:5000/users');
+    console.log(response.data);
+    setElement(response.data);
+  };
+
+  useEffect(() => {
+    getGiHubUserWithAxios();
+  }, []);
+
 
   const NewInitialElements = (newE) => {
     setElement((prevElement) => {

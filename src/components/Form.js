@@ -1,6 +1,9 @@
-import { useState } from 'react';
-import Button from '../UI-Components/Button';
+import { Button, Input } from '@mantine/core';
+import axios from 'axios';
+import React, { useState } from 'react';
+// import Button from '../UI-Components/Button';
 import Card from '../UI-Components/Card';
+import formStyle from './forum.module.css';
 
 const Form = (props) => {
   const [newName, setNewName] = useState('');
@@ -23,6 +26,9 @@ const Form = (props) => {
       age: newAge,
     };
 
+    axios.post('http://localhost:5000/users/add', element)
+      .then(res => console.log(res.data));
+
     props.passInitial(element);
     setNewName('');
     setNewAge('');
@@ -30,14 +36,14 @@ const Form = (props) => {
 
   return (
     <Card>
-      <form onSubmit={ submitEventHandler }>
-        <label>User Name</label>
-        <input
+      <form className={ formStyle.forum } onSubmit={ submitEventHandler }>
+        <label className={ formStyle.label }>User Name</label>
+        <Input
           type="text" value={ newName }
           onChange={ newNameHandler }
         />
-        <label>Age (Years)</label>
-        <input
+        <label className={ formStyle.label }>Age (Years)</label>
+        <Input
           type="number"
           value={ newAge }
           onChange={ newAgeHandler }

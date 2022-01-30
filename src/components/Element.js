@@ -1,4 +1,5 @@
 import classes from './ElementList.module.css';
+import React from 'react';
 
 const Element = (props) => {
   return (
