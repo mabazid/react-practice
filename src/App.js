@@ -16,6 +16,7 @@ function App() {
     setElement(response.data);
   };
 
+
   useEffect(() => {
     getGiHubUserWithAxios();
   }, []);
@@ -27,14 +28,16 @@ function App() {
     });
   };
 
+
   return (
     <div className="app">
       <div><Form
-        passInitial={ NewInitialElements }
-        onAddUser={ useEffect }
+        // passInitial={ add }
+        // passInitial={ NewInitialElements }
+        onAddUser={ getGiHubUserWithAxios }
         className="goal-form"
       /></div>
-      <div><ElementsList list={ element }/></div>
+      <div><ElementsList list={ element } onDeleteUser={ getGiHubUserWithAxios }/></div>
     </div>
   );
 }

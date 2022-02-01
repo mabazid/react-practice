@@ -33,9 +33,10 @@ const Form = (props) => {
           console.log('first ' + added);
         }
       }).then(() => {
-      if (added === true) {
-        props.passInitial(element);
-      }
+      // if (added === true) {
+      //   props.passInitial(element);
+      // }
+      props.onAddUser();
     });
 
 
