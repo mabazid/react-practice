@@ -21,12 +21,11 @@ router.route('/add').post((req, res) => {
 
 
 router.route('/delete').delete((req, res) => {
-  User.deleteOne({ _id: req.query.myID }).then((res) => {
-    console.log(req);
-    console.log('User  Deleted !');
+  User.deleteOne({ _id: req.query.id }).then(() => {
+    // console.log(req);
+    // console.log(res);
+    res.json('User added!');
   });
-  console.log('yeo!');
-  res.status(200).json;
 });
 
 // router.route('/delete/:id').delete((req, res) => {

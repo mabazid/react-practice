@@ -8,9 +8,12 @@ import EditButton from './EditButton';
 
 const Element = (props) => {
   const deleteAction = () => {
-    axios.delete(`http://localhost:5000/users/delete/`, { params: { myID: props.myID } })
-      .then((res) => console.log('here'));
-    props.userDeleted();
+    axios.delete(`http://localhost:5000/users/delete/`, { params: { id: props.myID } })
+      .then(() => {
+        console.log('here');
+        // console.log(res);
+        props.userDeleted();
+      });
   };
 
   return <div>
