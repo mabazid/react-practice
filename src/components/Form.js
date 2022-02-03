@@ -26,7 +26,7 @@ const Form = (props) => {
       name: newName,
       age: newAge,
     };
-    axios.post('http://localhost:5000/users/add', element)
+    axios.post('http://mabazid:5000/users/add', element)
       .then(res => {
         if (res.data === 'User added!') {
           added = true;

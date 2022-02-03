@@ -11,7 +11,7 @@ function App() {
   const [element, setElement] = useState(initialElements);
 
   const getGiHubUserWithAxios = async () => {
-    const response = await axios.get('http://localhost:5000/users');
+    const response = await axios.get('http://mabazid:5000/users');
     console.log(response.data);
     setElement(response.data);
   };

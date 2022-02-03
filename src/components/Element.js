@@ -1,14 +1,17 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import classes from '../UI-Components/Element.module.css';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
+import EditUser from './EditUser';
+// import EditUser from './EditUser'
 
-// axios.delete(`http://localhost:5000/users/delete`, { data: { source: props.myID } });
 
 const Element = (props) => {
+  const [editMode, setEditMode] = useState(false);
+
   const deleteAction = () => {
-    axios.delete(`http://localhost:5000/users/delete/`, { params: { id: props.myID } })
+    axios.delete(`http://mabazid:5000/users/delete/`, { params: { id: props.myID } })
       .then(() => {
         console.log('here');
         // console.log(res);
@@ -16,17 +19,38 @@ const Element = (props) => {
       });
   };
 
-  return <div>
-    <li
-      className={ classes.li }
-    >
-      { props.name } : { props.age }
-      <div>
-        <EditButton/>
-        <DeleteButton daction={ deleteAction }/>
-      </div>
-    </li>
+  const updateAction = (element) => {
+    axios.put(`http://mabazid:5000/users/edit/`, {
+      data: {
+        id: props.myID,
+        name: element.name,
+        age: element.age,
+      },
+    })
+      .then(() => {
+        props.userDeleted();
+      });
+    displayEditC();
+  };
 
-  </div>;
+  const displayEditC = () => {
+    setEditMode(!editMode);
+  };
+
+  return (
+    <div>
+      { editMode && <EditUser updateHandler={ updateAction }/> }
+      <div>
+        <li
+          className={ classes.li }
+        >
+          { props.name } : { props.age }
+          <div>
+            <EditButton eAction={ displayEditC }/>
+            <DeleteButton daction={ deleteAction }/>
+          </div>
+        </li>
+      </div>
+    </div>);
 };
 export default Element;
