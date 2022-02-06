@@ -10,17 +10,9 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
+mongoose.connect(process.env.URI);
 
-const uri = process.env.URI;
-mongoose.connect(uri,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
-const connection = mongoose.connection;
-
-connection.once('open', () => {
+mongoose.connection.once('open', () => {
   console.log('MongoDB connection established');
 });
 

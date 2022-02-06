@@ -16,6 +16,7 @@ const Element = (props) => {
         console.log('here');
         // console.log(res);
         props.userDeleted();
+
       });
   };
 
