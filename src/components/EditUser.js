@@ -23,14 +23,16 @@ const EditUser = (props) => {
   };
 
   return <div className={ classes.modal }>
-    <form onSubmit={ submitHandler }>
-      <label>Edit Name</label>
-      <input
-        type="text"
-        value={ newName }
-        onChange={ newNameHandler }
-      />
-      <div>
+    <form className={ classes.form } onSubmit={ submitHandler }>
+      <div className={ classes.input }>
+        <label>Edit Name</label>
+        <input
+          type="text"
+          value={ newName }
+          onChange={ newNameHandler }
+        />
+      </div>
+      <div className={ classes.input }>
         <label>Edit Age</label>
         <input
           type="number"
@@ -38,7 +40,9 @@ const EditUser = (props) => {
           onChange={ newAgeHandler }
         />
       </div>
-      <button type="submit">Save</button>
+      <div className={ classes.buttonDiv }>
+        <button type="submit">Save</button>
+      </div>
     </form>
   </div>;
 };
