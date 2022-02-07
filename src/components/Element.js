@@ -11,7 +11,7 @@ const Element = (props) => {
   const [editMode, setEditMode] = useState(false);
 
   const deleteAction = () => {
-    axios.delete(`http://mabazid:5000/users/delete/`, { params: { id: props.myID } })
+    axios.delete(`http://localhost:5000/users/delete/`, { params: { id: props.myID } })
       .then(() => {
         console.log('here');
         // console.log(res);
@@ -21,7 +21,7 @@ const Element = (props) => {
   };
 
   const updateAction = (element) => {
-    axios.put(`http://mabazid:5000/users/edit/`, {
+    axios.put(`http://localhost:5000/users/edit/`, {
       data: {
         id: props.myID,
         name: element.name,

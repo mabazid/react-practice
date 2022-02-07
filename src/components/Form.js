@@ -26,13 +26,10 @@ const Form = (props) => {
       name: newName,
       age: newAge,
     };
-    axios.post('http://mabazid:5000/users/add', element)
-      .then(res => {
-        if (res.data === 'User added!') {
-          added = true;
-          console.log('first ' + added);
-        }
-      }).then(() => {
+    axios.post('http://localhost:5000/users/add', element)
+      .then(res =>
+        res.data === 'User added!',
+      ).then(() => {
       // if (added === true) {
       //   props.passInitial(element);
       // }
