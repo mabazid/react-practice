@@ -1,9 +1,7 @@
-import { Button, Input } from '@mantine/core';
+// import Button from '../UI-Components/Button';
 import axios from 'axios';
 import React, { useState } from 'react';
-// import Button from '../UI-Components/Button';
-import Card from '../UI-Components/Card';
-import formStyle from './forum.module.css';
+import classes from '../UI-Components/Form.module.css';
 
 const Form = (props) => {
   const [newName, setNewName] = useState('');
@@ -42,29 +40,31 @@ const Form = (props) => {
   };
 
   return (
-    <Card>
-      <form
-        className={ formStyle.forum }
-        onSubmit={ submitEventHandler }
-      >
-        <label
-          className={ formStyle.label }
-        >User Name</label>
-        <Input
-          type="text" value={ newName }
-          onChange={ newNameHandler }
+    <form
+      className={ classes.form }
+      onSubmit={ submitEventHandler }
+    >
+      <div className={ classes.inputDiv }>
+        <label>User Name </label>
+        <input placeholder="Max Mustermann"
+               type="text" value={ newName }
+               className={ classes.input }
+               onChange={ newNameHandler }
         />
-        <label
-          className={ formStyle.label }
-        >Age (Years)</label>
-        <Input
-          type="number"
-          value={ newAge }
-          onChange={ newAgeHandler }
+      </div>
+      <div className={ classes.inputDiv }>
+        <label>Age </label>
+        <input placeholder="Enter Age" size="md"
+               type="number"
+               value={ newAge }
+               className={ classes.input }
+               onChange={ newAgeHandler }
         />
-        <Button type="submit">Add User</Button>
-      </form>
-    </Card>
+      </div>
+      <div className={ classes.btn }>
+        <button type="submit">Add User</button>
+      </div>
+    </form>
   );
 };
 export default Form;

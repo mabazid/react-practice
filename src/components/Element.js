@@ -1,10 +1,10 @@
+// import EditUser from './EditUser'
 import axios from 'axios';
 import React, { useState } from 'react';
-import classes from '../UI-Components/Element.module.css';
+import classes from '../UI-Components/Form.module.css';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import EditUser from './EditUser';
-// import EditUser from './EditUser'
 
 
 const Element = (props) => {
@@ -39,19 +39,14 @@ const Element = (props) => {
   };
 
   return (
-    <div>
+    <tr className={ classes.inputDiv }>
       { editMode && <EditUser updateHandler={ updateAction }/> }
-      <div>
-        <li
-          className={ classes.li }
-        >
-          { props.name } : { props.age }
-          <div>
-            <EditButton eAction={ displayEditC }/>
-            <DeleteButton daction={ deleteAction }/>
-          </div>
-        </li>
-      </div>
-    </div>);
+      <td>{ props.name } : { props.age }</td>
+      <td>
+        <EditButton eAction={ displayEditC }/>
+        <DeleteButton daction={ deleteAction }/>
+      </td>
+    </tr>
+  );
 };
 export default Element;

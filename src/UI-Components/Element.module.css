@@ -1,8 +1,10 @@
-.li {
+.usersTable {
   margin: 2rem auto;
-  width: 90%;
-  max-width: 40rem;
   display: flex;
   justify-content: space-between;
   border-radius: 5px;
+}
+
+.usersTable:nth-child(odd) {
+  background: #80ced6;
 }

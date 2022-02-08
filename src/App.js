@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import classes from './App.module.css';
 import ElementsList from './components/ElementsList';
 import Form from './components/Form';
 
@@ -30,14 +30,14 @@ function App() {
 
 
   return (
-    <div className="app">
-      <div><Form
+    <div className={ classes.app }>
+      <Form
         // passInitial={ add }
         // passInitial={ NewInitialElements }
         onAddUser={ getGiHubUserWithAxios }
-        className="goal-form"
-      /></div>
-      <div><ElementsList list={ element } onDeleteUser={ getGiHubUserWithAxios }/></div>
+      />
+      <ElementsList list={ element } onDeleteUser={ getGiHubUserWithAxios }/>
+      <footer>©Majd Abazid</footer>
     </div>
   );
 }

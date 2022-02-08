@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classes from '../UI-Components/EditUser.module.css';
+// import classes from '../UI-Components/EditUser.module.css';
 
 const EditUser = (props) => {
   const [newName, setNewName] = useState(props.name);
@@ -22,9 +22,9 @@ const EditUser = (props) => {
     props.updateHandler(element);
   };
 
-  return <div className={ classes.modal }>
-    <form className={ classes.form } onSubmit={ submitHandler }>
-      <div className={ classes.input }>
+  return <div>
+    <form onSubmit={ submitHandler }>
+      <div>
         <label>Edit Name</label>
         <input
           type="text"
@@ -32,7 +32,7 @@ const EditUser = (props) => {
           onChange={ newNameHandler }
         />
       </div>
-      <div className={ classes.input }>
+      <div>
         <label>Edit Age</label>
         <input
           type="number"
@@ -40,7 +40,7 @@ const EditUser = (props) => {
           onChange={ newAgeHandler }
         />
       </div>
-      <div className={ classes.buttonDiv }>
+      <div>
         <button type="submit">Save</button>
       </div>
     </form>
