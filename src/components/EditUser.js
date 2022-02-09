@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-// import classes from '../UI-Components/EditUser.module.css';
+import Button from '../UI-Components/Button';
+import classes from '../UI-Components/EditUser.module.css';
+import classes2 from '../UI-Components/Form.module.css';
 
 const EditUser = (props) => {
   const [newName, setNewName] = useState(props.name);
@@ -22,26 +24,34 @@ const EditUser = (props) => {
     props.updateHandler(element);
   };
 
-  return <div>
-    <form onSubmit={ submitHandler }>
-      <div>
-        <label>Edit Name</label>
+  return <div className={ classes.modal }>
+    <div
+      className={ classes.backdrop }
+      onClick={ props.eAction }
+    />
+    <form
+      onSubmit={ submitHandler }
+      className={ `${ classes2.form } ${ classes.form }` }
+    >
+      <div className={ `${ classes2.inputDiv } ${ classes.inputDiv }` }>
+        <label>New Name</label>
         <input
           type="text"
           value={ newName }
           onChange={ newNameHandler }
         />
       </div>
-      <div>
-        <label>Edit Age</label>
+      <div className={ `${ classes2.inputDiv } ${ classes.inputDiv }` }>
+        <label>New Age</label>
         <input
           type="number"
           value={ newAge }
           onChange={ newAgeHandler }
         />
       </div>
-      <div>
-        <button type="submit">Save</button>
+      <div className={ classes.buttonDiV }>
+        <Button onClick={ props.eAction }>Cancel</Button>
+        <Button type="submit">Save</Button>
       </div>
     </form>
   </div>;

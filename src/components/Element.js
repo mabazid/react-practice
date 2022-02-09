@@ -40,7 +40,7 @@ const Element = (props) => {
 
   return (
     <tr className={ classes.inputDiv }>
-      { editMode && <EditUser updateHandler={ updateAction }/> }
+      { editMode && <EditUser updateHandler={ updateAction } eAction={ displayEditC }/> }
       <td>{ props.name } : { props.age }</td>
       <td>
         <EditButton eAction={ displayEditC }/>

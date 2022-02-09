@@ -1,6 +1,7 @@
 // import Button from '../UI-Components/Button';
 import axios from 'axios';
 import React, { useState } from 'react';
+import Button from '../UI-Components/Button';
 import classes from '../UI-Components/Form.module.css';
 
 const Form = (props) => {
@@ -62,7 +63,7 @@ const Form = (props) => {
         />
       </div>
       <div className={ classes.btn }>
-        <button type="submit">Add User</button>
+        <Button type="submit">Add User</Button>
       </div>
     </form>
   );
