@@ -4,8 +4,8 @@ import classes from '../UI-Components/EditUser.module.css';
 import classes2 from '../UI-Components/Form.module.css';
 
 const EditUser = (props) => {
-  const [newName, setNewName] = useState(props.name);
-  const [newAge, setNewAge] = useState(props.age);
+  const [newName, setNewName] = useState(props.oldName);
+  const [newAge, setNewAge] = useState(props.oldAge);
 
   const newAgeHandler = (event) => {
     setNewAge(event.target.value);
@@ -34,11 +34,15 @@ const EditUser = (props) => {
       className={ `${ classes2.form } ${ classes.form }` }
     >
       <div className={ `${ classes2.inputDiv } ${ classes.inputDiv }` }>
+        <label>User: { props.oldName } { props.oldAge }</label>
+      </div>
+      <div className={ `${ classes2.inputDiv } ${ classes.inputDiv }` }>
         <label>New Name</label>
         <input
           type="text"
           value={ newName }
           onChange={ newNameHandler }
+          autoFocus
         />
       </div>
       <div className={ `${ classes2.inputDiv } ${ classes.inputDiv }` }>

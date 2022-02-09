@@ -11,22 +11,22 @@
 .modal {
   position: absolute;
   top: 15%;
-  left: 30%;
+  left: 35%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40%;
+  width: 30%;
   height: auto;
   z-index: 100;
   overflow: hidden;
   border-radius: 5px;
   background: #618685;
-  border: solid 2px #fefbd8;
+  box-shadow: 0 2px 100px 10px #fefbd8;
 }
 
 .form {
+  border: solid 2px #fefbd8;
   margin: 0;
-  border: 0;
   padding-top: 7%;
   background: #618685;
   z-index: 100;
@@ -46,7 +46,15 @@
   align-items: center;
   padding: 0.5em;
   margin: 0.5em auto;
+}
 
+.inputDiv input {
+  width: 70%;
+  border-radius: 5px;
+  flex: 3;
+  font: inherit;
+  padding: 0.35rem 0.35rem;
+  border: 1px solid #cccccc;
 }
 
 
