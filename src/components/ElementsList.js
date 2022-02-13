@@ -1,28 +1,24 @@
 import React from 'react';
-import Card from '../UI-Components/Card';
+import classes from '../UI-Components/ElementList.module.css';
 import Element from './Element';
-import classes from './ElementList.module.css';
 
 const ElementsList = (props) => {
-  const callback = ()=>{
+  const callback = () => {
     props.onDeleteUser();
-  }
+  };
 
-  return <div>
-    <Card>
-      <ul className={ classes.users }>
-        { props.list.map((initialElements) => (
-          <Element
-            userDeleted={callback}
-            myID={ initialElements._id }
-            name={ initialElements.name }
-            age={ initialElements.age }
-          />
-        ))
-        }
-      </ul>
-    </Card>
-  </div>;
+  return <table className={ classes.usersTable }>
+    { props.list.map((initialElements) => (
+      <Element
+        userDeleted={ callback }
+        myID={ initialElements._id }
+        key={ initialElements._id }
+        name={ initialElements.name }
+        age={ initialElements.age }
+      />
+    ))
+    }
+  </table>;
 };
 
 export default ElementsList;

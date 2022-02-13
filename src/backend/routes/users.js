@@ -1,5 +1,7 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
+const mongoose = require('mongoose');
+
 
 router.route('/').get((req, res) => {
   User.find()
@@ -21,10 +23,23 @@ router.route('/add').post((req, res) => {
 
 
 router.route('/delete').delete((req, res) => {
-  User.deleteOne({ _id: req.query.id }).then(() => {
-    // console.log(req);
-    // console.log(res);
+  User.deleteOne({
+    _id: req.query.id,
+  }).then(() => {
     res.json('User added!');
+  });
+});
+
+router.route('/edit').put((req, res) => {
+  User.updateOne(
+    { _id: req.body.data.id },
+    {
+      $set: {
+        name: req.body.data.name,
+        age: req.body.data.age,
+      },
+    }).then(() => {
+    res.json('User Updated!');
   });
 });
 

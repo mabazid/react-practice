@@ -1,13 +1,14 @@
-import { Button, Input } from '@mantine/core';
-import axios from 'axios';
-import React, { useState } from 'react';
 // import Button from '../UI-Components/Button';
-import Card from '../UI-Components/Card';
-import formStyle from './forum.module.css';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import Button from '../UI-Components/Button';
+import classes from '../UI-Components/Form.module.css';
 
 const Form = (props) => {
   const [newName, setNewName] = useState('');
   const [newAge, setNewAge] = useState('');
+  const [inputIsEmpty, setInputIsEmpty] = useState(true);
+
   let added = false;
 
   const newNameHandler = (event) => {
@@ -18,6 +19,15 @@ const Form = (props) => {
     setNewAge(event.target.value);
   };
 
+  useEffect(() => {
+    if (newName.length && newAge.length !== 0) {
+      setInputIsEmpty(false);
+    } else {
+      setInputIsEmpty(true);
+    }
+    console.log(inputIsEmpty);
+  }, [newName, newAge]);
+
 
   const submitEventHandler = (event) => {
     event.preventDefault();
@@ -26,13 +36,10 @@ const Form = (props) => {
       name: newName,
       age: newAge,
     };
-    axios.post('http://mabazid:5000/users/add', element)
-      .then(res => {
-        if (res.data === 'User added!') {
-          added = true;
-          console.log('first ' + added);
-        }
-      }).then(() => {
+    axios.post('http://localhost:5000/users/add', element)
+      .then(res =>
+        res.data === 'User added!',
+      ).then(() => {
       // if (added === true) {
       //   props.passInitial(element);
       // }
@@ -45,29 +52,31 @@ const Form = (props) => {
   };
 
   return (
-    <Card>
-      <form
-        className={ formStyle.forum }
-        onSubmit={ submitEventHandler }
-      >
-        <label
-          className={ formStyle.label }
-        >User Name</label>
-        <Input
-          type="text" value={ newName }
-          onChange={ newNameHandler }
+    <form
+      className={ classes.form }
+      onSubmit={ submitEventHandler }
+    >
+      <div className={ classes.inputDiv }>
+        <label>User Name </label>
+        <input placeholder="Max Mustermann"
+               type="text" value={ newName }
+               className={ classes.input }
+               onChange={ newNameHandler }
         />
-        <label
-          className={ formStyle.label }
-        >Age (Years)</label>
-        <Input
-          type="number"
-          value={ newAge }
-          onChange={ newAgeHandler }
+      </div>
+      <div className={ classes.inputDiv }>
+        <label>Age </label>
+        <input placeholder="Enter Age" size="md"
+               type="number"
+               value={ newAge }
+               className={ classes.input }
+               onChange={ newAgeHandler }
         />
-        <Button type="submit">Add User</Button>
-      </form>
-    </Card>
+      </div>
+      <div className={ classes.btn }>
+        <Button type="submit" disabled={ inputIsEmpty }>Add User</Button>
+      </div>
+    </form>
   );
 };
 export default Form;
