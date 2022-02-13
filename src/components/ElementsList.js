@@ -12,6 +12,7 @@ const ElementsList = (props) => {
       <Element
         userDeleted={ callback }
         myID={ initialElements._id }
+        key={ initialElements._id }
         name={ initialElements.name }
         age={ initialElements.age }
       />

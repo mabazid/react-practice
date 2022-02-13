@@ -1,12 +1,14 @@
 // import Button from '../UI-Components/Button';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../UI-Components/Button';
 import classes from '../UI-Components/Form.module.css';
 
 const Form = (props) => {
   const [newName, setNewName] = useState('');
   const [newAge, setNewAge] = useState('');
+  const [inputIsEmpty, setInputIsEmpty] = useState(true);
+
   let added = false;
 
   const newNameHandler = (event) => {
@@ -16,6 +18,15 @@ const Form = (props) => {
   const newAgeHandler = (event) => {
     setNewAge(event.target.value);
   };
+
+  useEffect(() => {
+    if (newName.length && newAge.length !== 0) {
+      setInputIsEmpty(false);
+    } else {
+      setInputIsEmpty(true);
+    }
+    console.log(inputIsEmpty);
+  }, [newName, newAge]);
 
 
   const submitEventHandler = (event) => {
@@ -63,7 +74,7 @@ const Form = (props) => {
         />
       </div>
       <div className={ classes.btn }>
-        <Button type="submit">Add User</Button>
+        <Button type="submit" disabled={ inputIsEmpty }>Add User</Button>
       </div>
     </form>
   );
