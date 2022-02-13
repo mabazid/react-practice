@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import Button from '../UI-Components/Button';
 import classes from '../UI-Components/EditUser.module.css';
 import classes2 from '../UI-Components/Form.module.css';
 
 const EditUser = (props) => {
-  const [newName, setNewName] = useState(props.oldName);
-  const [newAge, setNewAge] = useState(props.oldAge);
+  // for every stroke updated input
+  // const [newName, setNewName] = useState(props.oldName);
+  // const [newAge, setNewAge] = useState(props.oldAge);
+  // const newAgeHandler = (event) => {
+  //   setNewAge(event.target.value);
+  // };
+  //
+  // const newNameHandler = (event) => {
+  //   setNewName(event.target.value);
+  // };
 
-  const newAgeHandler = (event) => {
-    setNewAge(event.target.value);
-  };
-
-  const newNameHandler = (event) => {
-    setNewName(event.target.value);
-  };
+  const newNameRef = useRef();
+  const newAgeRef = useRef();
 
   const submitHandler = (event) => {
     event.preventDefault();
+
     const element = {
-      name: newName,
-      age: newAge,
+      name: newNameRef.current.value,
+      age: newAgeRef.current.value,
     };
     props.updateHandler(element);
   };
@@ -36,21 +40,21 @@ const EditUser = (props) => {
       <div className={ `${ classes2.inputDiv } ${ classes.inputDiv }` }>
         <label>User: { props.oldName } { props.oldAge }</label>
       </div>
+
       <div className={ `${ classes2.inputDiv } ${ classes.inputDiv }` }>
         <label>New Name</label>
         <input
           type="text"
-          value={ newName }
-          onChange={ newNameHandler }
+          ref={ newNameRef }
           autoFocus
         />
       </div>
+
       <div className={ `${ classes2.inputDiv } ${ classes.inputDiv }` }>
         <label>New Age</label>
         <input
           type="number"
-          value={ newAge }
-          onChange={ newAgeHandler }
+          ref={ newAgeRef }
         />
       </div>
       <div className={ classes.buttonDiV }>
