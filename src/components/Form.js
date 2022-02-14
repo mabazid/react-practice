@@ -1,41 +1,80 @@
-// import Button from '../UI-Components/Button';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useReducer } from 'react';
+import ListContext from '../context/ListContext';
 import Button from '../UI-Components/Button';
 import classes from '../UI-Components/Form.module.css';
 
-const Form = (props) => {
-  const [newName, setNewName] = useState('');
-  const [newAge, setNewAge] = useState('');
-  const [inputIsEmpty, setInputIsEmpty] = useState(true);
 
-  let added = false;
+const nameReducer = (state, action) => {
+  if (action.type === 'nameInput') {
+    return {
+      value: action.value,
+      valid: action.value.length !== 0,
+    };
+  }
+  return {
+    value: '',
+    valid: false,
+  };
+};
+
+const ageReducer = (state, action) => {
+  if (action.type === 'ageInput') {
+    return {
+      value: action.value,
+      valid: action.value > 10,
+    };
+  }
+  return {
+    value: '',
+    valid: false,
+  };
+};
+
+const Form = (props) => {
+  // handling input with useState
+  // const [newName, setNewName] = useState('');
+  // const [newAge, setNewAge] = useState('');
+  // const [inputIsEmpty, setInputIsEmpty] = useState(true);
+
+  // useEffect(() => {
+  //   if (newName && newAge) {
+  //     setInputIsEmpty(false);
+  //   } else {
+  //     setInputIsEmpty(true);
+  //   }
+  // }, [newName, newAge]);
+
+
+  const [newName, dispatchName] = useReducer(nameReducer, {
+    value: '',
+    valid: false,
+  });
+  const [newAge, dispatchAge] = useReducer(ageReducer, {
+    value: '',
+    valid: false,
+  });
+
+  const listCTX = useContext(ListContext);
 
   const newNameHandler = (event) => {
-    setNewName(event.target.value);
+    dispatchName({ type: 'nameInput', value: event.target.value });
   };
 
   const newAgeHandler = (event) => {
-    setNewAge(event.target.value);
+    dispatchAge({ type: 'ageInput', value: event.target.value });
   };
-
-  useEffect(() => {
-    if (newName.length && newAge.length !== 0) {
-      setInputIsEmpty(false);
-    } else {
-      setInputIsEmpty(true);
-    }
-    console.log(inputIsEmpty);
-  }, [newName, newAge]);
 
 
   const submitEventHandler = (event) => {
     event.preventDefault();
 
     const element = {
-      name: newName,
-      age: newAge,
+      name: newName.value,
+      age: newAge.value,
     };
+
+
     axios.post('http://localhost:5000/users/add', element)
       .then(res =>
         res.data === 'User added!',
@@ -43,12 +82,12 @@ const Form = (props) => {
       // if (added === true) {
       //   props.passInitial(element);
       // }
-      props.onAddUser();
+      listCTX.onListUpdate();
     });
 
 
-    setNewName('');
-    setNewAge('');
+    dispatchName({});
+    dispatchAge({});
   };
 
   return (
@@ -59,7 +98,8 @@ const Form = (props) => {
       <div className={ classes.inputDiv }>
         <label>User Name </label>
         <input placeholder="Max Mustermann"
-               type="text" value={ newName }
+               type="text"
+               value={ newName.value }
                className={ classes.input }
                onChange={ newNameHandler }
         />
@@ -68,13 +108,16 @@ const Form = (props) => {
         <label>Age </label>
         <input placeholder="Enter Age" size="md"
                type="number"
-               value={ newAge }
+               value={ newAge.value }
                className={ classes.input }
                onChange={ newAgeHandler }
         />
       </div>
       <div className={ classes.btn }>
-        <Button type="submit" disabled={ inputIsEmpty }>Add User</Button>
+        <Button
+          type="submit"
+          disabled={ !(newName.valid && newAge.valid) }
+        >Add User</Button>
       </div>
     </form>
   );
