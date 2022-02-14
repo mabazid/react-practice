@@ -8,16 +8,18 @@ const ElementsList = (props) => {
   };
 
   return <table className={ classes.usersTable }>
-    { props.list.map((initialElements) => (
-      <Element
-        userDeleted={ callback }
-        myID={ initialElements._id }
-        key={ initialElements._id }
-        name={ initialElements.name }
-        age={ initialElements.age }
-      />
-    ))
-    }
+    <tbody>
+      { props.list.map((initialElements) => (
+        <Element
+          userDeleted={ callback }
+          myID={ initialElements._id }
+          key={ initialElements._id }
+          name={ initialElements.name }
+          age={ initialElements.age }
+        />
+      ))
+      }
+    </tbody>
   </table>;
 };
 
