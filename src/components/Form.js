@@ -1,6 +1,6 @@
-// import Button from '../UI-Components/Button';
 import axios from 'axios';
-import React, { useReducer } from 'react';
+import React, { useContext, useReducer } from 'react';
+import ListContext from '../context/ListContext';
 import Button from '../UI-Components/Button';
 import classes from '../UI-Components/Form.module.css';
 
@@ -55,6 +55,8 @@ const Form = (props) => {
     valid: false,
   });
 
+  const listCTX = useContext(ListContext);
+
   const newNameHandler = (event) => {
     dispatchName({ type: 'nameInput', value: event.target.value });
   };
@@ -62,6 +64,7 @@ const Form = (props) => {
   const newAgeHandler = (event) => {
     dispatchAge({ type: 'ageInput', value: event.target.value });
   };
+
 
   const submitEventHandler = (event) => {
     event.preventDefault();
@@ -79,7 +82,7 @@ const Form = (props) => {
       // if (added === true) {
       //   props.passInitial(element);
       // }
-      props.onAddUser();
+      listCTX.onListUpdate();
     });
 
 

@@ -5,7 +5,7 @@ const DeleteButton = (props) => {
     props.daction();
   };
 
-  return <button onClick={deleteHandler}>Delete</button>;
+  return <button onClick={ deleteHandler }>Delete</button>;
 };
 
 export default DeleteButton;

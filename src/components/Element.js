@@ -1,6 +1,7 @@
 // import EditUser from './EditUser'
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import ListContext from '../context/ListContext';
 import classes from '../UI-Components/Form.module.css';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
@@ -9,14 +10,12 @@ import EditUser from './EditUser';
 
 const Element = (props) => {
   const [editMode, setEditMode] = useState(false);
+  const listCTX = useContext(ListContext);
 
   const deleteAction = () => {
     axios.delete(`http://localhost:5000/users/delete/`, { params: { id: props.myID } })
       .then(() => {
-        console.log('here');
-        // console.log(res);
-        props.userDeleted();
-
+        listCTX.onListUpdate();
       });
   };
 
@@ -29,7 +28,7 @@ const Element = (props) => {
       },
     })
       .then(() => {
-        props.userDeleted();
+        listCTX.onListUpdate();
       });
     displayEditC();
   };
